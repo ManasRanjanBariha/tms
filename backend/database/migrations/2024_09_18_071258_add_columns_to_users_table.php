@@ -12,8 +12,8 @@ return new class extends Migration
     public function up()
 {
     Schema::table('users', function (Blueprint $table) {
-        // $table->enum('role', ['project_manager', 'general_user'])->default('general_user');
-        // $table->unsignedBigInteger('team_id')->nullable();
+        $table->enum('role', ['project_manager', 'general_user'])->default('general_user');
+        $table->unsignedBigInteger('team_id')->nullable();
 
         // $table->foreign('team_id')->references('id')->on('teams')->onDelete('set null');
     });

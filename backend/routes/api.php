@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -34,7 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/teams/{id}', [TeamController::class, 'show']);
     // Route::delete('/users/{id}', [AuthController::class, 'destroy']);
 });
-Route::middleware(['auth:sanctum', 'role:Project Manager'])->group(function () {
+
+Route::middleware(['auth:sanctum', RoleMiddleware::class.":project_manager"])->group(function () {
     Route::post('/teams', [TeamController::class, 'store']);
     Route::put('/teams/{id}', [TeamController::class, 'update']);
     Route::delete('/teams/{id}', [TeamController::class, 'destroy']);

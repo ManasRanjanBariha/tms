@@ -47,6 +47,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'team_user');
+    }
+    
+
     public function team()
     {
         return $this->belongsTo(Team::class);
@@ -55,6 +62,11 @@ class User extends Authenticatable
     public function managedTeam()
     {
         return $this->hasOne(Team::class, 'project_manager_id');
+    }
+
+    public function isProjectManager()
+    {
+        return $this->role === 'project_manager';
     }
 
     public function projects()
